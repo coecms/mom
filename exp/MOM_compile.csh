@@ -1,10 +1,18 @@
 #!/bin/csh -f
+#PBS -q express
+#PBS -l ncpus=8
+#PBS -l vmem=8GB
+#PBS -l walltime=10:00
+#PBS -N build_mom5
+#PBS -joe
+#PBS -wd
+
 # Minimal compile script for fully coupled model CM2M experiments
 
 set echo
-set platform      = gfortran   # A unique identifier for your platfo
+set platform      = vayu   # A unique identifier for your platfo
                                   # This corresponds to the mkmf templates in $root/bin dir.
-set type          = MOM_solo      # Type of the experiment
+set type          = MOM_SIS      # Type of the experiment
 set help = 0
 
 set argv = (`getopt -u -o h -l type: -l platform:  -l help  --  $*`)

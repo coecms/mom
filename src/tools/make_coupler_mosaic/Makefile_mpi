@@ -1,5 +1,5 @@
 # The following three directory may need to set.
-NETCDFPATH = /usr/local/netcdf-3.6.2
+NETCDFPATH = ${NETCDF_BASE}
 SHAREDIR = $(PWD)/../../shared/mosaic
 COREDIR  = $(PWD)
 TOOLSHAREDIR = $(PWD)/../shared
