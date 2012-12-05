@@ -3,7 +3,7 @@
 #PBS -l ncpus=8
 #PBS -l vmem=8GB
 #PBS -l walltime=10:00
-#PBS -N build_mom5
+#PBS -N build_mom
 #PBS -joe
 #PBS -wd
 
