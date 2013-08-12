@@ -1,4 +1,5 @@
 *~
 exec/
 work/
-bin/mppnccombine.gfortran
+bin/mppnccombine.*
+src/path_names_*
