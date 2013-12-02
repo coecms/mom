@@ -1,19 +1,21 @@
 # The following three directory may need to set.
-NETCDFPATH = /usr/local/netcdf-3.6.2
 SHAREDIR = $(PWD)/../../shared/mosaic
 COREDIR  = $(PWD)
 TOOLSHAREDIR = $(PWD)/../shared
 CFLAGS = -O2 -fast -I$(TOOLSHAREDIR) -I$(COREDIR) -I$(SHAREDIR) -I${NETCDFPATH}/include -I/usr/include
-LDFLAGS =  -L${NETCDFPATH}/lib -lm -lnetcdf 
+LDFLAGS =  -L$(NETCDF)/lib -lm -lnetcdf 
 LNFLAGS = -v
 CC      = icc
 
-OBJS = mosaic_util.o interp.o create_xgrid.o mpp.o mpp_domain.o mpp_io.o tool_util.o create_lonlat_grid.o \
-       create_conformal_cubic_grid.o create_gnomonic_cubic_grid.o create_grid_from_file.o make_hgrid.o 
+OBJS = mosaic_util.o interp.o create_xgrid.o mpp.o mpp_domain.o mpp_io.o \
+	   tool_util.o create_lonlat_grid.o create_conformal_cubic_grid.o \
+	   create_gnomonic_cubic_grid.o create_grid_from_file.o make_hgrid.o \
+	   read_mosaic.o
 
-HEADERS = Makefile $(TOOLSHAREDIR)/mpp.h  $(TOOLSHAREDIR)/mpp_domain.h   \
-          $(TOOLSHAREDIR)/mpp_io.h $(SHAREDIR)/mosaic_util.h  $(SHAREDIR)/create_xgrid.h  \
-          $(SHAREDIR)/interp.h $(TOOLSHAREDIR)/tool_util.h               \
+HEADERS = Makefile $(TOOLSHAREDIR)/mpp.h  $(TOOLSHAREDIR)/mpp_domain.h \
+          $(TOOLSHAREDIR)/mpp_io.h $(SHAREDIR)/mosaic_util.h \
+		  $(SHAREDIR)/read_mosaic.h $(SHAREDIR)/create_xgrid.h \
+          $(SHAREDIR)/interp.h $(TOOLSHAREDIR)/tool_util.h \
           $(COREDIR)/create_hgrid.h
 
 make_hgrid: $(OBJS)
@@ -30,6 +32,9 @@ interp.o: $(SHAREDIR)/interp.c $(HEADERS)
 
 create_xgrid.o: $(SHAREDIR)/create_xgrid.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $(SHAREDIR)/create_xgrid.c
+
+read_mosaic.o: $(SHAREDIR)/read_mosaic.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $(SHAREDIR)/read_mosaic.c
 
 mpp.o: $(TOOLSHAREDIR)/mpp.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $(TOOLSHAREDIR)/mpp.c 

@@ -5,7 +5,6 @@
 CPPFLAGS =
 FFLAGS_BASE = -fpp -fno-alias -stack_temps -safe-cray-ptr -ftz -assume byterecl -g -i4 -r8 -Wp,-w
 #FFLAGS_VERBOSE = -v -V -what
-#FFLAGS_REPRO = -fltconsistency
 FFLAGS_REPRO = -align all
 # Explicitly include netcdf.mod (remove when module is fixed against ifort 12.x)
 FFLAGS_TEMP = -I/apps/netcdf/$(NETCDF_VERSION)/include/Intel
