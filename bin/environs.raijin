@@ -3,5 +3,5 @@
          module load intel-fc/13.4.183
          module load intel-cc/13.4.183
          module load netcdf/4.2.1.1
-         module load openmpi/1.6.5
+         module load openmpi/1.6.5-mlx
          setenv mpirunCommand  "mpirun -np"
