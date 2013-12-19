@@ -1,15 +1,17 @@
 # The following three directory may need to set.
-NETCDFPATH = /usr/local/netcdf-3.6.2
+NETCDFPATH = $(NETCDF)
 SHAREDIR = $(PWD)/../../shared/mosaic
 COREDIR  = $(PWD)
 TOOLSHAREDIR = $(PWD)/../shared
-CFLAGS = -O2 -fast -I$(TOOLSHAREDIR) -I$(COREDIR) -I$(SHAREDIR) -I${NETCDFPATH}/include -I/usr/include
-LDFLAGS =  -L${NETCDFPATH}/lib -lm -lnetcdf -lmpi 
-DEFFLAG = -Duse_libMPI -Dfix_truncate
-LNFLAGS = -v             
+CFLAGS = -O2 -fast -I$(TOOLSHAREDIR) -I$(COREDIR) -I$(SHAREDIR) \
+		 -I$(NETCDFPATH)/include -I/usr/include
+LDFLAGS =  -L$(NETCDFPATH)/lib -lm -lnetcdf -lmpi 
+DEFFLAG = -Duse_libMPI -Dfix_truncate -Duse_netCDF
+LNFLAGS = -v
 CC      = icc
 
-OBJS = mosaic_util.o create_xgrid.o mpp.o mpp_domain.o mpp_io.o make_coupler_mosaic.o tool_util.o interp.o
+OBJS = mosaic_util.o create_xgrid.o mpp.o mpp_domain.o mpp_io.o \
+	   make_coupler_mosaic.o tool_util.o interp.o read_mosaic.o
 
 HEADERS = Makefile $(TOOLSHAREDIR)/mpp.h  $(TOOLSHAREDIR)/mpp_domain.h   \
           $(TOOLSHAREDIR)/mpp_io.h $(SHAREDIR)/mosaic_util.h                    \
@@ -25,6 +27,9 @@ mosaic_util.o: $(SHAREDIR)/mosaic_util.c $(HEADERS)
 
 create_xgrid.o: $(SHAREDIR)/create_xgrid.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $(SHAREDIR)/create_xgrid.c 
+
+read_mosaic.o: $(SHAREDIR)/read_mosaic.c $(HEADERS)
+	$(CC) $(DEFFLAG) $(CFLAGS) -c $(SHAREDIR)/read_mosaic.c
 
 mpp.o: $(TOOLSHAREDIR)/mpp.c $(HEADERS)
 	$(CC) $(DEFFLAG) $(CFLAGS) -c $(TOOLSHAREDIR)/mpp.c 
