@@ -1,0 +1,4 @@
+source /usr/share/Modules/init/tcsh
+module load fcc/1.2.1
+module load netcdf/4.1.3
+setenv mpirunCommand "mpirun -np"
